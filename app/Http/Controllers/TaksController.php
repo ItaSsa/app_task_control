@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaksController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         // $this->middleware("auth");
     }
     /**
@@ -15,16 +17,30 @@ class TaksController extends Controller
      */
     public function index()
     {
-        if(auth()->check()){
 
-            $id = auth()->user()->id;
-            $name = auth()->user()->name;
-            $email = auth()->user()->email;
+        if (Auth::check()) {
+
+            $id = Auth::user()->id;
+            $name = Auth::user()->name;
+            $email = Auth::user()->email;
 
             return "User logged: ID $id NAME $name EMAIL $email";
-        }else{
+        } else {
             return "User not logged";
         }
+
+        // if(auth()->check()){
+
+        //     $id = auth()->user()->id;
+        //     $name = auth()->user()->name;
+        //     $email = auth()->user()->email;
+
+        //     return "User logged: ID $id NAME $name EMAIL $email";
+        // }else{
+        //     return "User not logged";
+        // }
+
+
     }
 
     /**
