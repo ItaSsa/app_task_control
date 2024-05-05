@@ -8,14 +8,23 @@ use Illuminate\Http\Request;
 class TaksController extends Controller
 {
     public function __construct(){
-        $this->middleware("auth");
+        // $this->middleware("auth");
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return " Task index index ";
+        if(auth()->check()){
+
+            $id = auth()->user()->id;
+            $name = auth()->user()->name;
+            $email = auth()->user()->email;
+
+            return "User logged: ID $id NAME $name EMAIL $email";
+        }else{
+            return "User not logged";
+        }
     }
 
     /**
