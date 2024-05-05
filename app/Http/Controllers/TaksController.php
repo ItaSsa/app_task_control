@@ -10,7 +10,7 @@ class TaksController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware("auth");
+        $this->middleware("auth");
     }
     /**
      * Display a listing of the resource.
@@ -18,27 +18,13 @@ class TaksController extends Controller
     public function index()
     {
 
-        if (Auth::check()) {
+        $id = Auth::user()->id;
+        $name = Auth::user()->name;
+        $email = Auth::user()->email;
 
-            $id = Auth::user()->id;
-            $name = Auth::user()->name;
-            $email = Auth::user()->email;
+        return "User logged:  ID $id NAME $name EMAIL $email";
 
-            return "User logged: ID $id NAME $name EMAIL $email";
-        } else {
-            return "User not logged";
-        }
 
-        // if(auth()->check()){
-
-        //     $id = auth()->user()->id;
-        //     $name = auth()->user()->name;
-        //     $email = auth()->user()->email;
-
-        //     return "User logged: ID $id NAME $name EMAIL $email";
-        // }else{
-        //     return "User not logged";
-        // }
 
 
     }
